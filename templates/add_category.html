@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Add Category{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Add New Category</h2>
+
+<form method="post" class="w-50 mx-auto">
+  <div class="mb-3">
+    <label for="category_name" class="form-label">Category Name</label>
+    <input type="text" name="category_name" id="category_name" class="form-control" required autofocus>
+  </div>
+  <button type="submit" class="btn btn-primary">Add Category</button>
+</form>
+{% endblock %}
