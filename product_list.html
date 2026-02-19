@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Product List</h2>
+
+<table class="table table-hover align-middle">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price ($)</th>
+      <th>Quantity</th>
+      <th>Category</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <td>{{ product.product_id }}</td>
+      <td>{{ product.product_name }}</td>
+      <td>{{ "%.2f"|format(product.price) }}</td>
+      <td>{{ product.quantity }}</td>
+      <td>{{ product.category_name or 'None' }}</td>
+      <td>
+        <a href="{{ url_for('update_product', product_id=product.product_id) }}" class="btn btn-sm btn-warning">Edit</a>
+        <form action="{{ url_for('delete_product', product_id=product.product_id) }}" method="post" class="d-inline" onsubmit="return confirm('Are you sure to delete this product?');">
+          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6" class="text-center">No products available.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
